@@ -20,4 +20,3 @@ JS_FILES += ${IHP}/static/vendor/turbolinksInstantClick.js
 JS_FILES += ${IHP}/static/vendor/turbolinksMorphdom.js
 
 include ${IHP}/Makefile.dist
-
