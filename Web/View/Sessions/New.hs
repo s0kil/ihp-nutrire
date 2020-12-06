@@ -23,10 +23,12 @@ renderForm user =
   [hsx|
     <form method="POST" action={CreateSessionAction}>
       <div class="form-group">
-        <input name="email" value={get #email user} type="email" class="form-control" placeholder="E-Mail"/>
+        <label for="email">E-Mail</label>
+        <input name="email" value={get #email user} type="email" class="form-control" />
       </div>
       <div class="form-group">
-        <input name="password" type="password" class="form-control" placeholder="Password"/>
+        <label for="password">Password</label>
+        <input name="password" type="password" class="form-control" />
       </div>
       <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
