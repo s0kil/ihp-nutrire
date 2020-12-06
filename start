@@ -3,10 +3,19 @@
 
 set -e
 
+# Do Not Open Browser
+export IHP_BROWSER=echo
+
+# Editor To Use When Visiting Error Messages
+export IHP_EDITOR="code-exploration --goto"
+
+# Debug Mode
+# export DEBUG=1
+
 # Unless the RunDevServer binary is available, we rebuild the .envrc cache with nix-shell
 # and config cachix for using our binary cache
-command -v RunDevServer >/dev/null 2>&1 \
-    || { echo "PATH_add $(nix-shell -j auto --cores 0 --run 'printf %q $PATH')" > .envrc; }
+command -v RunDevServer >/dev/null 2>&1 ||
+  { echo "PATH_add $(nix-shell -j auto --cores 0 --run 'printf %q $PATH')" >.envrc; }
 
 # Now we have to load the PATH variable from the .envrc cache
 direnv allow
