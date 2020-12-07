@@ -34,11 +34,11 @@ data ArticlesController
   deriving (Eq, Show, Data)
 
 data CategoriesController
-    = CategoriesAction
-    | NewCategoryAction
-    | ShowCategoryAction { categoryId :: !(Id Category) }
-    | CreateCategoryAction
-    | EditCategoryAction { categoryId :: !(Id Category) }
-    | UpdateCategoryAction { categoryId :: !(Id Category) }
-    | DeleteCategoryAction { categoryId :: !(Id Category) }
-    deriving (Eq, Show, Data)
+  = CategoriesAction
+  | NewCategoryAction
+  | ShowCategoryAction {categoryId :: !(Id Category)}
+  | CreateCategoryAction
+  | EditCategoryAction {categoryId :: !(Id Category)}
+  | UpdateCategoryAction {categoryId :: !(Id Category)}
+  | DeleteCategoryAction {categoryId :: !(Id Category)}
+  deriving (Eq, Show, Data)

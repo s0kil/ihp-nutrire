@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+HASKELL_FILES=$(find . -name '*.hs')
+
+ormolu --mode inplace $HASKELL_FILES \
+  --ghc-opt -XTypeApplications

@@ -15,4 +15,3 @@ instance AutoRoute ArticlesController
 -- Generator Marker
 
 instance AutoRoute CategoriesController
-
