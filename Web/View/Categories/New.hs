@@ -7,8 +7,10 @@ data NewView = NewView {category :: Category}
 instance View NewView where
   html NewView {..} =
     [hsx|
-      <h1>New Category</h1>
-      {renderForm category}
+      <div style="max-width: 800px" class="m-auto">
+        <h1>New Category</h1>
+        {renderForm category}
+      </div>
     |]
 
 renderForm :: Category -> Html
