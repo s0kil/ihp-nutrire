@@ -1,16 +1,12 @@
 module Web.View.Articles.New where
 
+import Web.View.Articles.Aid
 import Web.View.Prelude
 
 data NewView = NewView
   { article :: Article,
     categories :: [Category]
   }
-
-instance CanSelect Category where
-  type SelectValue Category = Id Category
-  selectValue = get #id
-  selectLabel = get #name
 
 instance View NewView where
   html NewView {..} =
