@@ -13,7 +13,7 @@ import Web.Types
 
 defaultLayout :: Html -> Html
 defaultLayout inner =
-  H.docTypeHtml ! A.lang "en" $
+  H.docTypeHtml ! A.lang "en" ! A.class_ "w-full h-full" $
     [hsx|
       <head>
         {metaTags}
@@ -24,12 +24,13 @@ defaultLayout inner =
         <title>Nutrite</title>
       </head>
 
-      <body>
-        <div class="container mt-4">
-          {navigationPartial}
+      <body class="w-full h-full">
+        {navigation}
+        <div class="pt-20 pl-6 pr-6">
           {renderFlashMessages}
           {inner}
         </div>
+        TODO: FOOTER
       </body>
     |]
 
@@ -38,8 +39,6 @@ stylesheets = do
   when
     isDevelopment
     [hsx|
-      <link rel="stylesheet" href="/vendor/bootstrap.min.css"/>
-      <link rel="stylesheet" href="/vendor/flatpickr.min.css"/>
       <link rel="stylesheet" href="/app.css"/>
     |]
   when
@@ -54,13 +53,9 @@ scripts = do
     isDevelopment
     [hsx|
       <script id="livereload-script" src="/livereload.js"></script>
-      <script src="/vendor/jquery-3.2.1.slim.min.js"></script>
-      <script src="/vendor/timeago.js"></script>
-      <script src="/vendor/popper.min.js"></script>
-      <script src="/vendor/bootstrap.min.js"></script>
-      <script src="/vendor/flatpickr.js"></script>
       <script src="/helpers.js"></script>
       <script src="/vendor/morphdom-umd.min.js"></script>
+      <script src="/main.js"></script>
     |]
   when
     isProduction
@@ -79,13 +74,24 @@ metaTags =
     <meta property="og:description" content="TODO"/>
   |]
 
-navigationPartial :: Html
-navigationPartial =
+navigation :: Html
+navigation =
   [hsx|
-    <nav>
-      <ul>
+    <nav class="flex h-20 pl-6 pr-6 fixed w-full bg-white z-10">
+      <div class="self-center flex">
+        <div class="flex flex-row">
+          <img class="h-16" src="images/logo.png" alt="Nutrite" />
+          <h1 class="text-4xl self-end">
+            <a href="/" class="hover:underline">Nutrire</a>
+          </h1>
+        </div>
+      </div>
+      <div class="flex-1 self-center flex justify-center">
+        Categories Go Here
+      </div>
+      <div class="self-center flex">
         {loginLogoutLinks}
-      </ul>
+      </div>
     </nav>
   |]
   where
@@ -95,17 +101,30 @@ navigationPartial =
         Just user ->
           let fullname = get #fullname user
            in [hsx|
-            <li>
-              <p>{fullname}</p>
-              <a href={DeleteSessionAction} class="js-delete js-delete-no-confirm">Login Out</a>
-            </li>
+            <div class="flex items-center relative">
+              <button class="py-2 px-4 capitalize tracking-wide text-black border border-black font-medium focus:outline-none">
+                {fullname}
+              </button>
+              <span class="border"></span>
+              <div class="relative">
+                <button id="dropdown-toggle" onclick="toggleMenu()" class="py-2 px-4 capitalize tracking-wide border border-black text-black font-medium hover:bg-yellow-500 focus:outline-none">
+                  <svg class="h-6 w-6 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                  </svg>
+                </button>
+              </div>
+              <div id="user-menu" class="absolute hidden inset-x-0 top-0 mt-12 border border-black bg-white overflow-hidden shadow-xl">
+               <a href={NewArticleAction} class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">New Nutritional Guide</a>
+               <a href={NewCategoryAction} class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">Create Category</a>
+               <a href={DeleteSessionAction} class="js-delete js-delete-no-confirm block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">Sign Out</a>
+              </div>
+            </div>
           |]
         Nothing ->
           [hsx|
-            <li>
-              <a href={NewSessionAction}>Login In</a>
-            </li>
-            <li>
-              <a href={NewUserAction}>Register</a>
-            </li>
+            <div class="border border-black flex items-center">
+              <a href={NewSessionAction} class="block px-4 py-2 text-sm text-black hover:bg-yellow-500">Login</a>
+              <span>|</span>
+              <a href={NewUserAction} class="block px-4 py-2 text-sm text-black hover:bg-yellow-500">Register</a>
+            </div>
           |]

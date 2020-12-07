@@ -22,3 +22,23 @@ data UsersController
   = NewUserAction
   | CreateUserAction
   deriving (Eq, Show, Data)
+
+data ArticlesController
+  = ArticlesAction
+  | NewArticleAction
+  | ShowArticleAction {articleId :: !(Id Article)}
+  | CreateArticleAction
+  | EditArticleAction {articleId :: !(Id Article)}
+  | UpdateArticleAction {articleId :: !(Id Article)}
+  | DeleteArticleAction {articleId :: !(Id Article)}
+  deriving (Eq, Show, Data)
+
+data CategoriesController
+  = CategoriesAction
+  | NewCategoryAction
+  | ShowCategoryAction {categoryId :: !(Id Category)}
+  | CreateCategoryAction
+  | EditCategoryAction {categoryId :: !(Id Category)}
+  | UpdateCategoryAction {categoryId :: !(Id Category)}
+  | DeleteCategoryAction {categoryId :: !(Id Category)}
+  deriving (Eq, Show, Data)

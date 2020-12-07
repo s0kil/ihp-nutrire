@@ -6,10 +6,10 @@ import Web.View.Prelude
 instance View (NewView User) where
   html NewView {..} =
     [hsx|
-      <div class="h-100" id="sessions-new">
-        <div class="d-flex align-items-center">
-          <div class="w-100">
-            <div style="max-width: 400px" class="mx-auto mb-5">
+      <div id="sessions-new">
+        <div>
+          <div>
+            <div style="max-width: 400px" class="m-auto">
               <h5>Log In:</h5>
               {renderForm user}
             </div>
@@ -22,14 +22,14 @@ renderForm :: User -> Html
 renderForm user =
   [hsx|
     <form method="POST" action={CreateSessionAction}>
-      <div class="form-group">
+      <div>
         <label for="email">E-Mail</label>
-        <input name="email" value={get #email user} type="email" class="form-control" />
+        <input name="email" value={get #email user} type="email" />
       </div>
-      <div class="form-group">
+      <div>
         <label for="password">Password</label>
-        <input name="password" type="password" class="form-control" />
+        <input name="password" type="password" />
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Login</button>
+      <button type="submit">Login</button>
     </form>
   |]

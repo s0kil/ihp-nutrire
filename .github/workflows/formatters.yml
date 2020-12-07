@@ -1,0 +1,17 @@
+name: Formatters
+
+on:
+  - push
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  ormolu:
+    name: Ormolu (Haskell Formatter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mrkkrp/ormolu-action@v1
+        with:
+          extra-args: --ghc-opt -XTypeApplications
