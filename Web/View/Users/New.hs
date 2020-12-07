@@ -8,9 +8,9 @@ instance View NewView where
   html NewView {user} =
     [hsx|
       <div id={currentViewId}>
-        <div >
-          <div >
-            <div style="max-width: 400px" >
+        <div>
+          <div>
+            <div style="max-width: 400px" class="m-auto">
               <h5>Registration:</h5>
               {renderForm user}
             </div>

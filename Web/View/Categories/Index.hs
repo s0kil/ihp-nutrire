@@ -7,9 +7,9 @@ data IndexView = IndexView {categories :: [Category]}
 instance View IndexView where
   html IndexView {..} =
     [hsx|
-      <h1>Index <a href={pathTo NewCategoryAction} >+ New</a></h1>
-      <div >
-        <table >
+      <h1>Index <a href={pathTo NewCategoryAction}>+ New</a></h1>
+      <div>
+        <table>
           <thead>
             <tr>
               <th>Category</th>
@@ -28,7 +28,7 @@ renderCategory category =
     <tr>
       <td>{category}</td>
       <td><a href={ShowCategoryAction (get #id category)}>Show</a></td>
-      <td><a href={EditCategoryAction (get #id category)} >Edit</a></td>
-      <td><a href={DeleteCategoryAction (get #id category)} >Delete</a></td>
+      <td><a href={EditCategoryAction (get #id category)}>Edit</a></td>
+      <td><a href={DeleteCategoryAction (get #id category)}>Delete</a></td>
     </tr>
   |]

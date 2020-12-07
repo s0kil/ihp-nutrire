@@ -11,7 +11,9 @@ data NewView = NewView
 instance View NewView where
   html NewView {..} =
     [hsx|
-      {renderForm article categories}
+      <div style="max-width: 800px" class="m-auto">
+        {renderForm article categories}
+      </div>
     |]
 
 renderForm :: Article -> [Category] -> Html

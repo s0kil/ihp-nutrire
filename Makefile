@@ -18,6 +18,7 @@ JS_FILES += ${IHP}/static/vendor/morphdom-umd.min.js
 JS_FILES += ${IHP}/static/vendor/turbolinks.js
 JS_FILES += ${IHP}/static/vendor/turbolinksInstantClick.js
 JS_FILES += ${IHP}/static/vendor/turbolinksMorphdom.js
+JS_FILES += static/main.js
 
 define tailwindcss
 	npx tailwindcss build styles/main.css -o static/app.css -c styles/tailwind.config.js

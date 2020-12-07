@@ -7,9 +7,9 @@ instance View (NewView User) where
   html NewView {..} =
     [hsx|
       <div id="sessions-new">
-        <div >
-          <div >
-            <div style="max-width: 400px" >
+        <div>
+          <div>
+            <div style="max-width: 400px" class="m-auto">
               <h5>Log In:</h5>
               {renderForm user}
             </div>
@@ -22,14 +22,14 @@ renderForm :: User -> Html
 renderForm user =
   [hsx|
     <form method="POST" action={CreateSessionAction}>
-      <div >
+      <div>
         <label for="email">E-Mail</label>
         <input name="email" value={get #email user} type="email" />
       </div>
-      <div >
+      <div>
         <label for="password">Password</label>
         <input name="password" type="password" />
       </div>
-      <button type="submit" >Login</button>
+      <button type="submit">Login</button>
     </form>
   |]

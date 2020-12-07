@@ -55,6 +55,7 @@ scripts = do
       <script id="livereload-script" src="/livereload.js"></script>
       <script src="/helpers.js"></script>
       <script src="/vendor/morphdom-umd.min.js"></script>
+      <script src="/main.js"></script>
     |]
   when
     isProduction
@@ -113,17 +114,11 @@ navigation =
                 </button>
               </div>
               <div id="user-menu" class="absolute hidden inset-x-0 top-0 mt-12 border border-black bg-white overflow-hidden shadow-xl">
-               <a href="" class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">New Nutritional Guide</a>
-               <a href="" class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">Create Category</a>
+               <a href={NewArticleAction} class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">New Nutritional Guide</a>
+               <a href={NewCategoryAction} class="block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">Create Category</a>
                <a href={DeleteSessionAction} class="js-delete js-delete-no-confirm block px-4 py-2 text-sm text-black border-b hover:bg-yellow-500">Sign Out</a>
               </div>
             </div>
-
-            <script>
-              function toggleMenu() {
-                document.getElementById('user-menu').classList.toggle('hidden')
-              }
-            </script>
           |]
         Nothing ->
           [hsx|

@@ -38,7 +38,7 @@ instance Controller ArticlesController where
       |> ifValid \case
         Left article -> render EditView {..}
         Right article -> do
-          article <- article |> updateRecord
+          article |> updateRecord
           setSuccessMessage "Article updated"
           redirectTo EditArticleAction {..}
   action CreateArticleAction = do
@@ -47,11 +47,10 @@ instance Controller ArticlesController where
 
     article
       |> buildArticle
-      |> debug
       |> ifValid \case
         Left article -> render NewView {..}
         Right article -> do
-          article <- article |> createRecord
+          article |> createRecord
           setSuccessMessage "Article created"
           redirectTo ArticlesAction
   action DeleteArticleAction {articleId} = do
@@ -63,3 +62,6 @@ instance Controller ArticlesController where
 buildArticle article =
   article
     |> fill @["userId", "title", "text", "image", "categoryId"]
+    -- TODO: Validate Select Field `#categoryId`
+    |> validateField #title nonEmpty
+    |> validateField #text nonEmpty
