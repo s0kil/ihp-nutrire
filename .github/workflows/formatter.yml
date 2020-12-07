@@ -1,2 +1,0 @@
-- name: ormolu-action
-  uses: mrkkrp/ormolu-action@v1
