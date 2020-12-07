@@ -79,7 +79,7 @@ navigation =
     <nav class="flex h-20 pl-6 pr-6 fixed w-full bg-white z-10">
       <div class="self-center flex">
         <div class="flex flex-row">
-          <img class="h-16" src="images/logo.png"/>
+          <img class="h-16" src="images/logo.png" alt="Nutrite" />
           <h1 class="text-4xl self-end">
             <a href="/" class="hover:underline">Nutrire</a>
           </h1>
