@@ -11,13 +11,6 @@ data NewView = NewView
 instance View NewView where
   html NewView {..} =
     [hsx|
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href={ArticlesAction}>Articles</a></li>
-          <li class="breadcrumb-item active">New Article</li>
-        </ol>
-      </nav>
-      <h1>New Article</h1>
       {renderForm article categories}
     |]
 
