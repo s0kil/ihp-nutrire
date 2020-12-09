@@ -65,3 +65,4 @@ buildArticle article =
     -- TODO: Validate Select Field `#categoryId`
     |> validateField #title nonEmpty
     |> validateField #text nonEmpty
+    |> validateField #categoryId nonEmpty
