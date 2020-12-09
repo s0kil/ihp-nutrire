@@ -65,7 +65,4 @@ buildArticle article =
     -- TODO: Validate Select Field `#categoryId`
     |> validateField #title nonEmpty
     |> validateField #text nonEmpty
-    |> validateField #categoryId nonEmptyId
-
--- Temporary, Until https://github.com/digitallyinduced/ihp/issues/596 Is Resolved
-nonEmptyId id = if id == def then Failure "Select an option" else Success
+    |> validateField #categoryId nonEmpty
