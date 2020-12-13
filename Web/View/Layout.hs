@@ -87,7 +87,7 @@ navigation =
         </div>
       </div>
       <div class="flex-1 self-center flex justify-center">
-        Categories Go Here
+        Categories Links Go Here
       </div>
       <div class="self-center flex">
         {loginLogoutLinks}

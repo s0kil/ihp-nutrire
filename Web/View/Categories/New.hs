@@ -15,8 +15,9 @@ instance View NewView where
 
 renderForm :: Category -> Html
 renderForm category =
-  formFor
+  formFor'
     category
+    (pathTo CreateCategoryAction)
     [hsx|
       {(textField #name)}
       {(numberField #priority)}

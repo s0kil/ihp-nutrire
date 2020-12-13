@@ -62,7 +62,6 @@ instance Controller ArticlesController where
 buildArticle article =
   article
     |> fill @["userId", "title", "text", "image", "categoryId"]
-    -- TODO: Validate Select Field `#categoryId`
     |> validateField #title nonEmpty
     |> validateField #text nonEmpty
     |> validateField #categoryId nonEmpty
