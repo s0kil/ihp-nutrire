@@ -10,11 +10,12 @@ SET client_min_messages = warning;
 SET row_security = off;
 SET SESSION AUTHORIZATION DEFAULT;
 ALTER TABLE public.categories DISABLE TRIGGER ALL;
-INSERT INTO public.categories (id, name, priority)
+INSERT INTO public.categories (id, name, priority, slug)
 VALUES (
-    '7a508dfc-0e44-4f4a-82fa-0dd67c4e5700',
+    '7a9237a9-f731-40f0-8bc4-d5667b227835',
     'Breakfast',
-    1
+    0,
+    'breakfast'
   );
 ALTER TABLE public.categories ENABLE TRIGGER ALL;
 ALTER TABLE public.users DISABLE TRIGGER ALL;
@@ -28,11 +29,11 @@ INSERT INTO public.users (
     failed_login_attempts
   )
 VALUES (
-    'a0fb28d0-68de-44d0-89a0-3f84a826e06b',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
     'Daniel Sokil',
     'dtechtours@gmail.com',
     'danielsokil',
-    'sha256|17|ZofNa1UXrw4v3sJ9Yj8grA==|nhKWaKjFIDqBHahJMeX1X5njo7gDN1yeAReVxGVNf6s=',
+    'sha256|17|q8KCg7jcFXgXvnoksNO+aQ==|QIP3zlgJYCaRDc5incszhqCQ9L0Enee3ruvQDPAv1oQ=',
     NULL,
     0
   );
@@ -48,13 +49,13 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    'b44045b6-fc35-44c2-86a5-6c56d85d1272',
-    'a0fb28d0-68de-44d0-89a0-3f84a826e06b',
+    'a9e0ae78-903a-4b67-b5c6-27936de2f45e',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
     'French Breakfast',
-    'Oh It''s Great!',
+    'Oh It''s Amazing On The Weekends, Or Any Other Day!',
     '',
-    '2020-12-07 14:40:40.66475-05',
-    '7a508dfc-0e44-4f4a-82fa-0dd67c4e5700'
+    '2020-12-13 12:29:18.500472-05',
+    '7a9237a9-f731-40f0-8bc4-d5667b227835'
   );
 ALTER TABLE public.articles ENABLE TRIGGER ALL;
 ALTER TABLE public.votes DISABLE TRIGGER ALL;

@@ -36,9 +36,9 @@ data ArticlesController
 data CategoriesController
   = CategoriesAction
   | NewCategoryAction
-  | ShowCategoryAction {categoryId :: !(Id Category)}
+  | ShowCategoryAction {categoryId :: !(Maybe (Id Category)), slug :: !(Maybe Text)}
   | CreateCategoryAction
-  | EditCategoryAction {categoryId :: !(Id Category)}
-  | UpdateCategoryAction {categoryId :: !(Id Category)}
-  | DeleteCategoryAction {categoryId :: !(Id Category)}
+  | EditCategoryAction {categoryId :: !(Maybe (Id Category)), slug :: !(Maybe Text)}
+  | UpdateCategoryAction {categoryId :: !(Maybe (Id Category)), slug :: !(Maybe Text)}
+  | DeleteCategoryAction {categoryId :: !(Maybe (Id Category)), slug :: !(Maybe Text)}
   deriving (Eq, Show, Data)

@@ -13,20 +13,23 @@ instance Controller CategoriesController where
   action NewCategoryAction = do
     let category = newRecord
     render NewView {..}
-  action ShowCategoryAction {categoryId} = do
-    category <- fetch categoryId
+  action ShowCategoryAction {categoryId, slug} = do
+    putStrLn "Here ShowCategoryAction"
+    category <- fetchCategory categoryId slug
     render ShowView {..}
-  action EditCategoryAction {categoryId} = do
-    category <- fetch categoryId
+  action EditCategoryAction {categoryId, slug} = do
+    putStrLn "Here EditCategoryAction"
+    category <- fetchCategory categoryId slug
     render EditView {..}
-  action UpdateCategoryAction {categoryId} = do
-    category <- fetch categoryId
+  action UpdateCategoryAction {categoryId, slug} = do
+    putStrLn "Here UpdateCategoryAction"
+    category <- fetchCategory categoryId slug
     category
       |> buildCategory
       |> ifValid \case
         Left category -> render EditView {..}
         Right category -> do
-          category <- category |> updateRecord
+          category |> updateRecord
           setSuccessMessage "Category updated"
           redirectTo EditCategoryAction {..}
   action CreateCategoryAction = do
@@ -36,15 +39,25 @@ instance Controller CategoriesController where
       |> ifValid \case
         Left category -> render NewView {..}
         Right category -> do
-          category <- category |> createRecord
+          category |> createRecord
           setSuccessMessage "Category created"
           redirectTo CategoriesAction
-  action DeleteCategoryAction {categoryId} = do
-    category <- fetch categoryId
+  action DeleteCategoryAction {categoryId, slug} = do
+    putStrLn "Here DeleteCategoryAction"
+    category <- fetchCategory categoryId slug
     deleteRecord category
     setSuccessMessage "Category deleted"
     redirectTo CategoriesAction
 
-buildCategory category =
-  category
-    |> fill @["name", "priority"]
+buildCategory emptyCategory =
+  let category =
+        emptyCategory
+          |> fill @["name", "priority"]
+          |> validateField #name nonEmpty
+      slug = toSlug (get #name category)
+   in category |> set #slug slug
+
+fetchCategory categoryId slug =
+  case slug of
+    Just slug -> query @Category |> filterWhere (#slug, slug) |> fetchOne
+    Nothing -> fetchOne categoryId

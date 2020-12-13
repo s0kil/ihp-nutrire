@@ -20,7 +20,8 @@ CREATE TABLE articles (
 CREATE TABLE categories (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
   name TEXT NOT NULL,
-  priority INT NOT NULL
+  priority INT NOT NULL,
+  slug TEXT NOT NULL
 );
 CREATE TABLE votes (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
