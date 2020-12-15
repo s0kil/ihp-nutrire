@@ -30,7 +30,7 @@ instance CanRoute CategoriesController where
           pure CreateCategoryAction
     let showCategoryActionById = do
           string "/category/"
-          categoryId :: Id Category <- parseId @Category
+          categoryId <- parseId
           endOfInput
           pure ShowCategoryAction {categoryId = Just categoryId, slug = Nothing}
     let showCategoryActionBySlug = do
