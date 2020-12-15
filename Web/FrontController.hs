@@ -1,6 +1,5 @@
 module Web.FrontController where
 
-import IHP.ControllerPrelude
 import IHP.LoginSupport.Middleware
 import IHP.RouterPrelude
 import Web.Controller.Articles
@@ -11,7 +10,7 @@ import Web.Controller.Static
 import Web.Controller.Users
 import Web.View.Layout
 
--- Used Inside The Navigation Bar
+-- Context Used Inside The Navigation Bar
 fetchCategories :: (?modelContext :: ModelContext, ?context :: ControllerContext) => IO ()
 fetchCategories = do
   categories :: [Category] <- query @Category |> fetch
