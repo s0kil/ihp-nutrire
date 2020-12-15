@@ -4,6 +4,7 @@ import Application.Helper.View
 import Generated.Types
 import IHP.Controller.RequestContext
 import IHP.Environment
+import IHP.Prelude
 import IHP.ViewPrelude
 import IHP.ViewSupport
 import qualified Text.Blaze.Html5 as H
@@ -87,7 +88,7 @@ navigation =
         </div>
       </div>
       <div class="flex-1 self-center flex justify-center">
-        Categories Links Go Here
+        {categoriesWithLinks}
       </div>
       <div class="self-center flex">
         {loginLogoutLinks}
@@ -95,6 +96,21 @@ navigation =
     </nav>
   |]
   where
+    categoriesWithLinks :: Html
+    categoriesWithLinks =
+      [hsx|{forEach categories renderCategory}|]
+      where
+        categories :: [Category]
+        categories = fromFrozenContext @[Category]
+        categoryPath :: Category -> Text
+        categoryPath category =
+          let categoryId = Nothing
+              slug = Just (get #slug category)
+           in pathTo ShowCategoryAction {..}
+        renderCategory :: Category -> Html
+        renderCategory category =
+          [hsx|<a href={categoryPath category}>{get #name category}</a>|]
+
     loginLogoutLinks :: Html
     loginLogoutLinks =
       case fromFrozenContext @(Maybe User) of
