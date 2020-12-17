@@ -102,7 +102,7 @@ navigation =
         categoryPath :: Category -> Text
         categoryPath category =
           let categoryId = (get #id category)
-           in pathTo ShowCategoryAction {..}
+           in pathTo ArticlesAction {..}
 
         renderCategory :: Category -> Html
         renderCategory category =

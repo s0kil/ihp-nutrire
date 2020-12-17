@@ -8,8 +8,13 @@ import Web.View.Articles.New
 import Web.View.Articles.Show
 
 instance Controller ArticlesController where
-  action ArticlesAction = do
-    articles <- query @Article |> fetch
+  action ArticlesAction {categoryId} = do
+    category <-
+      fetch categoryId
+        >>= fetchRelated #articles
+
+    let articles = get #articles category
+
     render IndexView {..}
   action NewArticleAction = do
     ensureIsUser
@@ -51,17 +56,34 @@ instance Controller ArticlesController where
         Left article -> render NewView {..}
         Right article -> do
           article |> createRecord
+          let categoryId = get #categoryId article
           setSuccessMessage "Article created"
-          redirectTo ArticlesAction
+          redirectTo ArticlesAction {..}
   action DeleteArticleAction {articleId} = do
     article <- fetch articleId
+    let categoryId = get #categoryId article
     deleteRecord article
     setSuccessMessage "Article deleted"
-    redirectTo ArticlesAction
+    redirectTo ArticlesAction {..}
+
+maybeSetDefaultImage :: Article -> Article
+maybeSetDefaultImage article =
+  article
+    |> validateField #image isEmptyValue
+    |> getValidationFailure #image
+    |> \case
+      Just _ ->
+        let seed = (get #title article) |> toSlug
+         in article |> set #image (Just ("https://picsum.photos/seed/" ++ seed ++ "/600"))
+      Nothing ->
+        article
 
 buildArticle article =
   article
     |> fill @["userId", "title", "text", "image", "categoryId"]
+    |> maybeSetDefaultImage
     |> validateField #title nonEmpty
     |> validateField #text nonEmpty
     |> validateField #categoryId nonEmpty
+
+-- isEmptyValue

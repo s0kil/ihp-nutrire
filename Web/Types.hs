@@ -24,7 +24,7 @@ data UsersController
   deriving (Eq, Show, Data)
 
 data ArticlesController
-  = ArticlesAction
+  = ArticlesAction {categoryId :: (Id Category)}
   | NewArticleAction
   | ShowArticleAction {articleId :: !(Id Article)}
   | CreateArticleAction
