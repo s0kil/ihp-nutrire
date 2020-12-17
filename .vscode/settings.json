@@ -1,3 +1,6 @@
 {
   "nixEnvSelector.nixShellConfig": "${workspaceRoot}/default.nix",
+  "cSpell.words": [
+    "Nutrire"
+  ],
 }

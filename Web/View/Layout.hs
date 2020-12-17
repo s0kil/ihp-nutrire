@@ -14,7 +14,7 @@ import Web.Types
 
 defaultLayout :: Html -> Html
 defaultLayout inner =
-  H.docTypeHtml ! A.lang "en" ! A.class_ "w-full h-full" $
+  H.docTypeHtml ! A.lang "en" ! A.class_ "" $
     [hsx|
       <head>
         {metaTags}
@@ -22,16 +22,16 @@ defaultLayout inner =
         {stylesheets}
         {scripts}
 
-        <title>Nutrite</title>
+        <title>Nutrire</title>
       </head>
 
-      <body class="w-full h-full">
+      <body class="">
         {navigation}
         <div class="pt-20 pl-6 pr-6">
           {renderFlashMessages}
           {inner}
         </div>
-        TODO: FOOTER
+        {footer}
       </body>
     |]
 
@@ -81,7 +81,7 @@ navigation =
     <nav class="flex h-20 pl-6 pr-6 fixed w-full bg-white z-10">
       <div class="self-center flex">
         <div class="flex flex-row">
-          <img class="h-16" src="images/logo.png" alt="Nutrite" />
+          <img class="h-16" src="images/logo.png" alt="Nutrire" />
           <h1 class="text-4xl self-end">
             <a href="/" class="hover:underline">Nutrire</a>
           </h1>
@@ -144,3 +144,43 @@ navigation =
               <a href={NewUserAction} class="block px-4 py-2 text-sm text-black hover:bg-yellow-500">Register</a>
             </div>
           |]
+
+footer :: Html
+footer =
+  [hsx|
+    <footer class="flex h-14 pl-6 pr-6 mt-10 mb-6">
+      <div class="self-center flex justify-center">
+        <div class="flex flex-row">
+          <img class="h-10" src="images/logo.png" alt="Nutrire" />
+          <h1 class="text-xl self-end">
+            <a href="/" class="hover:underline">Nutrire</a>
+          </h1>
+        </div>
+      </div>
+      <div class="flex-1 self-center flex justify-center">
+        <ul class="flex space-x-4">
+          {linkTo "Privacy Policy" "/privacy-policy"}
+          {linkTo "Terms & Conditions" "/terms-and-conditions"}
+          <li>
+            <span>
+              Copyright 2020. All rights reserved.
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="self-center flex justify-center">
+        Connect With Us:
+        Icon1
+        Icon2
+        Icon3
+      </div>
+    </footer>
+  |]
+  where
+    linkTo :: Text -> Text -> Html
+    linkTo text path =
+      [hsx|
+        <li>
+          <a href={path} class="text-orange-600 hover:underline">{text}</a>
+        </li>
+      |]
