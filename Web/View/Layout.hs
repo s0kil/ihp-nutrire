@@ -1,12 +1,8 @@
 module Web.View.Layout (defaultLayout, Html) where
 
-import Application.Helper.View
 import Generated.Types
-import IHP.Controller.RequestContext
-import IHP.Environment
 import IHP.Prelude
 import IHP.ViewPrelude
-import IHP.ViewSupport
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
 import Web.Routes

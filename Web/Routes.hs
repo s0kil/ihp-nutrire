@@ -1,6 +1,5 @@
 module Web.Routes where
 
-import Generated.Types
 import IHP.RouterPrelude
 import Web.Types
 

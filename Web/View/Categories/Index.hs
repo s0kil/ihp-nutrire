@@ -1,6 +1,5 @@
 module Web.View.Categories.Index where
 
-import Web.Types
 import Web.View.Prelude
 
 data IndexView = IndexView {categories :: [Category]}

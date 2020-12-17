@@ -2,7 +2,6 @@ module Web.View.CustomCSSFramework where
 
 import IHP.FlashMessages.Types
 import IHP.View.CSSFramework
-import IHP.View.Classes
 import IHP.View.Types
 import IHP.ViewPrelude
 
