@@ -98,11 +98,12 @@ navigation =
       where
         categories :: [Category]
         categories = fromFrozenContext @[Category]
+
         categoryPath :: Category -> Text
         categoryPath category =
-          let categoryId = Nothing
-              slug = Just (get #slug category)
+          let categoryId = (get #id category)
            in pathTo ShowCategoryAction {..}
+
         renderCategory :: Category -> Html
         renderCategory category =
           [hsx|<a href={categoryPath category}>{get #name category}</a>|]

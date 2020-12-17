@@ -10,12 +10,11 @@ SET client_min_messages = warning;
 SET row_security = off;
 SET SESSION AUTHORIZATION DEFAULT;
 ALTER TABLE public.categories DISABLE TRIGGER ALL;
-INSERT INTO public.categories (id, name, priority, slug)
+INSERT INTO public.categories (id, name, priority)
 VALUES (
-    '7a9237a9-f731-40f0-8bc4-d5667b227835',
+    '6b8bc3d1-2eeb-47eb-8885-8444a91287e8',
     'Breakfast',
-    0,
-    'breakfast'
+    1
   );
 ALTER TABLE public.categories ENABLE TRIGGER ALL;
 ALTER TABLE public.users DISABLE TRIGGER ALL;
@@ -49,13 +48,13 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    'a9e0ae78-903a-4b67-b5c6-27936de2f45e',
+    '4e279ab9-cd04-43ed-b3f3-c7b3f0461a6a',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'French Breakfast',
-    'Oh It''s Amazing On The Weekends, Or Any Other Day!',
+    'Oh Amazing Breakfast',
+    'Blah, Blah.',
     '',
-    '2020-12-13 12:29:18.500472-05',
-    '7a9237a9-f731-40f0-8bc4-d5667b227835'
+    '2020-12-17 09:56:46.246963-05',
+    '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
 ALTER TABLE public.articles ENABLE TRIGGER ALL;
 ALTER TABLE public.votes DISABLE TRIGGER ALL;
