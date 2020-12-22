@@ -8,6 +8,7 @@ import Web.Controller.Prelude
 import Web.Controller.Sessions
 import Web.Controller.Static
 import Web.Controller.Users
+import Web.Controller.Votes
 import Web.View.Layout
 
 -- Context Used Inside The Navigation Bar
@@ -20,6 +21,7 @@ instance FrontController WebApplication where
   controllers =
     [ startPage WelcomeAction,
       parseRoute @UsersController,
+      parseRoute @VotesController,
       parseRoute @SessionsController,
       parseRoute @ArticlesController,
       parseRoute @CategoriesController
