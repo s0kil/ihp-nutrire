@@ -33,7 +33,6 @@ renderArticle article order =
             </h1>
             <p>{get #text article}</p>
             <div class="absolute bottom-0">
-              Order: {order}
               Voting Button
             </div>
           </div>

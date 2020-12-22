@@ -48,12 +48,12 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    '95fdca3a-3670-420e-b7ff-e0b0d4a4f767',
+    '304ac067-7962-4ec1-82f2-bbcd76cd64f3',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'Testing Image Default',
-    'Alright',
-    'https://picsum.photos/seed/testing-image-default/600',
-    '2020-12-17 10:48:43.619669-05',
+    'Random Title 0',
+    'Random Text 0',
+    'https://loremflickr.com/600/600/nutrition?lock=27',
+    '2020-12-21 20:53:54.493885-05',
     '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
 INSERT INTO public.articles (
@@ -66,12 +66,12 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    '20fc8c54-20a8-405d-80ea-43a2f5eaa5be',
+    '80a7e51b-c7e0-4cda-878e-0879bb6b0943',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'Oh Amazing Breakfast Two',
-    'Random 1',
-    'https://picsum.photos/seed/oh-amazing-breakfast-two/600',
-    '2020-12-17 10:54:40.13003-05',
+    'Random Title 01',
+    'Random Text 01',
+    'https://loremflickr.com/600/600/nutrition?lock=29',
+    '2020-12-21 20:54:06.759308-05',
     '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
 INSERT INTO public.articles (
@@ -84,12 +84,12 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    '8693a153-f0fb-441b-80cf-04f4dc771bd1',
+    'cbc9c235-b94a-4be7-b90d-d5fc30504f1d',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'This Is Great!',
-    'Blah Blah',
-    'https://picsum.photos/seed/this-is-great/600',
-    '2020-12-17 11:28:04.037768-05',
+    'Random Title 012',
+    'Random Text 012',
+    'https://loremflickr.com/600/600/nutrition?lock=31',
+    '2020-12-21 20:54:18.693809-05',
     '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
 INSERT INTO public.articles (
@@ -102,12 +102,48 @@ INSERT INTO public.articles (
     category_id
   )
 VALUES (
-    '30fa1bbd-ac5b-4de5-a69c-65ce661504a2',
+    '086070ce-c93c-41d5-bf14-b179555f7fa1',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'Oh Amazing Breakfast Three',
-    'Blah Blah',
-    'https://picsum.photos/seed/oh-amazing-breakfast-three/600',
-    '2020-12-17 11:31:54.029381-05',
+    'Random Title 0123',
+    'Random Text 0123',
+    'https://loremflickr.com/600/600/nutrition?lock=33',
+    '2020-12-21 20:54:30.768547-05',
+    '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
+  );
+INSERT INTO public.articles (
+    id,
+    user_id,
+    title,
+    text,
+    image,
+    created_at,
+    category_id
+  )
+VALUES (
+    'e9eb15b2-903e-4863-a7ac-b2d810883d7e',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
+    'Random Title 01234',
+    'Random Text 01234',
+    'https://loremflickr.com/600/600/nutrition?lock=35',
+    '2020-12-21 20:54:45.324728-05',
+    '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
+  );
+INSERT INTO public.articles (
+    id,
+    user_id,
+    title,
+    text,
+    image,
+    created_at,
+    category_id
+  )
+VALUES (
+    '780411d3-be90-4a96-b1bf-dfe05bbe489f',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
+    'Random Title 012345',
+    'Random Text 012345',
+    'https://loremflickr.com/600/600/nutrition?lock=37',
+    '2020-12-21 20:54:57.606242-05',
     '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
 ALTER TABLE public.articles ENABLE TRIGGER ALL;
