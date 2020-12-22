@@ -1,7 +1,6 @@
 module Web.Controller.Articles where
 
 import qualified Data.Text as Text
-
 import IHP.ControllerPrelude
 import Web.Controller.Prelude
 import Web.View.Articles.Edit
@@ -75,12 +74,11 @@ maybeSetDefaultImage article =
     |> getValidationFailure #image
     |> \case
       Just _ ->
-        let
-          naiveRandomInt :: Int
-          naiveRandomInt =
-            [(get #title article), (get #text article)]
-            |> map Text.length
-            |> sum
+        let naiveRandomInt :: Int
+            naiveRandomInt =
+              [(get #title article), (get #text article)]
+                |> map Text.length
+                |> sum
          in article |> set #image (Just ("https://loremflickr.com/600/600/nutrition?lock=" ++ show naiveRandomInt))
       Nothing ->
         article
