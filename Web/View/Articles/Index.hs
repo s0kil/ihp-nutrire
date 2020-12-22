@@ -25,7 +25,7 @@ renderArticle article order =
    in [hsx|
         <div class="grid grid-cols-2">
           <div style={"order: " ++ show imageOrderStyle}>
-            <img src={pathToImage article} alt={get #title article}>
+            <img class="rounded" src={pathToImage article} alt={get #title article}>
           </div>
           <div class="relative m-6" style={"order: " ++ show textOrderStyle}>
             <h1 class="text-xl">

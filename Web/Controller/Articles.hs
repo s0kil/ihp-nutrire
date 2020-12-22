@@ -33,6 +33,7 @@ instance Controller ArticlesController where
     render NewView {..}
   action ShowArticleAction {articleId} = do
     article <- fetch articleId
+    author <- fetch (get #userId article)
     render ShowView {..}
   action EditArticleAction {articleId} = do
     article <- fetch articleId
