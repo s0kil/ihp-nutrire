@@ -1,5 +1,6 @@
 module Web.View.Votes.Shared (votingButton) where
 
+import Web.View.Components.Button (button)
 import Web.View.Prelude
 
 votingButton :: Article -> Maybe User -> Html
@@ -9,7 +10,7 @@ votingButton article (Just user) =
     <form action={CreateVoteAction} method="POST">
         <input type="hidden" name="articleId" value={articleId} />
         <input type="hidden" name="userId" value={userId} />
-        <button type="submit">Up Vote</button>
+        <button class={button} type="submit">Up Vote</button>
     </form>
   |]
   where

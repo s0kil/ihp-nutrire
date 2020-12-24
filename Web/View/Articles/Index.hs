@@ -1,6 +1,7 @@
 module Web.View.Articles.Index where
 
 import Web.View.Prelude
+import Web.View.Votes.Shared (votingButton)
 
 data IndexView = IndexView {articles :: [Article]}
 
@@ -33,7 +34,7 @@ renderArticle article order =
             </h1>
             <p>{get #text article}</p>
             <div class="absolute bottom-0">
-              Voting Button
+              {votingButton article currentUser}
             </div>
           </div>
         </div>
@@ -46,6 +47,9 @@ renderArticle article order =
     pathToImage :: Article -> Text
     pathToImage article =
       fromMaybe "" (get #image article)
+
+    currentUser :: Maybe User
+    currentUser = fromFrozenContext @(Maybe User)
 
 {-
   The Result Is:
