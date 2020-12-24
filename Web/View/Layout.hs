@@ -116,7 +116,7 @@ navigation =
           let fullname = get #fullname user
            in [hsx|
             <div class="flex items-center relative">
-              <button class={button}>
+              <button class={button ++ "font-medium"}>
                 {fullname}
               </button>
               <span class="border"></span>
