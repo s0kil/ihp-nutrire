@@ -1,7 +1,14 @@
-module Web.View.Votes.Shared (votingButton) where
+module Web.View.Votes.Shared (votingButton, voteExists) where
 
 import Web.View.Components.Button (button)
 import Web.View.Prelude
+
+voteExists :: [Vote] -> Id Article -> Bool
+voteExists votes articleId =
+  let exists = find (\vote -> articleId == (get #articleId vote)) votes
+   in case exists of
+        Just _ -> True
+        Nothing -> False
 
 votingButton :: Article -> Maybe User -> Html
 votingButton _ Nothing = [hsx||]

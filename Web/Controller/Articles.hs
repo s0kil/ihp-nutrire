@@ -14,6 +14,9 @@ instance Controller ArticlesController where
       fetch categoryId
         >>= fetchRelated #articles
 
+    votes <-
+      query @Vote |> fetch
+
     let articles = get #articles category
 
     render IndexView {..}
