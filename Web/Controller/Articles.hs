@@ -37,6 +37,11 @@ instance Controller ArticlesController where
   action ShowArticleAction {articleId} = do
     article <- fetch articleId
     author <- fetch (get #userId article)
+    vote <-
+      query @Vote
+        |> filterWhere (#articleId, articleId)
+        |> fetchOneOrNothing
+
     render ShowView {..}
   action EditArticleAction {articleId} = do
     article <- fetch articleId

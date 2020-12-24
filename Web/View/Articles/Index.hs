@@ -1,7 +1,7 @@
 module Web.View.Articles.Index where
 
 import Web.View.Prelude
-import Web.View.Votes.Shared (voteExists, votingButton)
+import Web.View.Votes.Shared (articleVotingButton)
 
 data IndexView = IndexView
   { votes :: [Vote],
@@ -18,12 +18,12 @@ instance View IndexView where
         |]
 
 renderArticles :: [Vote] -> (Int, [Article]) -> Html
-renderArticles votes (order, article : []) = renderArticle article order (voteExists votes (get #id article))
+renderArticles votes (order, article : []) = renderArticle article order votes
 renderArticles votes (order, articles) =
-  forEach articles (\article -> renderArticle article order (voteExists votes (get #id article)))
+  forEach articles (\article -> renderArticle article order votes)
 
-renderArticle :: Article -> Int -> Bool -> Html
-renderArticle article order voteExists =
+renderArticle :: Article -> Int -> [Vote] -> Html
+renderArticle article order votes =
   let textOrderStyle = if order == 2 then 1 else 2
       imageOrderStyle = if order == 2 then 2 else 1
    in [hsx|
@@ -37,7 +37,7 @@ renderArticle article order voteExists =
             </h1>
             <p>{get #text article}</p>
             <div class="absolute bottom-0">
-              {if not voteExists then (votingButton article currentUser) else ""}
+                {articleVotingButton article votes currentUser}
             </div>
           </div>
         </div>

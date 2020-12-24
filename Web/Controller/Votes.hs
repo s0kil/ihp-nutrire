@@ -24,6 +24,11 @@ instance Controller VotesController where
               setSuccessMessage "You Have Already Voted"
 
           maybeRedirectToReferer request
+  action DeleteVoteAction {voteId} = do
+    vote <- fetch voteId
+    deleteRecord vote
+    setSuccessMessage "Removed Vote Successfully"
+    maybeRedirectToReferer request
 
 buildVote vote =
   vote
