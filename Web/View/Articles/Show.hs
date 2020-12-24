@@ -43,5 +43,6 @@ instance View ShowView where
       currentUser = fromFrozenContext @(Maybe User)
 
 votingButton :: Maybe Vote -> Article -> Maybe User -> Html
-votingButton (Just vote) _ _ = downVoteButton (get #id vote)
-votingButton Nothing article user = upVoteButton article user
+votingButton (Just vote) _ _ = downVoteButton vote
+votingButton Nothing _ Nothing = ""
+votingButton Nothing article (Just user) = upVoteButton article user

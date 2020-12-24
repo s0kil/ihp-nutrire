@@ -5,36 +5,26 @@ import Network.Wai (requestHeaderReferer)
 import Web.Controller.Prelude
 
 instance Controller VotesController where
-  action CreateVoteAction = do
-    let vote = newRecord @Vote
-    vote
-      |> buildVote
-      |> debug
-      |> ifValid \case
-        Left _ -> do
-          setErrorMessage "Voting Failed"
-          maybeRedirectToReferer request
-        Right vote -> do
-          voteIsUnique <- isUniqueVote vote
-          case voteIsUnique of
-            True -> do
-              vote |> createRecord
-              setSuccessMessage "Successfully Voted"
-            False -> do
-              setSuccessMessage "You Have Already Voted"
+  action CreateVoteAction {userId, articleId} = do
+    let vote =
+          newRecord @Vote
+            |> set #userId userId
+            |> set #articleId articleId
 
-          maybeRedirectToReferer request
+    voteIsUnique <- isUniqueVote vote
+    case voteIsUnique of
+      True -> do
+        vote |> createRecord
+        setSuccessMessage "Successfully Voted"
+      False -> do
+        setErrorMessage "You Have Already Voted"
+
+    maybeRedirectToReferer request
   action DeleteVoteAction {voteId} = do
     vote <- fetch voteId
     deleteRecord vote
     setSuccessMessage "Removed Vote Successfully"
     maybeRedirectToReferer request
-
-buildVote vote =
-  vote
-    |> fill @["userId", "articleId"]
-    |> validateField #userId nonEmpty
-    |> validateField #articleId nonEmpty
 
 isUniqueVote vote = do
   let userId = get #userId vote

@@ -3,34 +3,29 @@ module Web.View.Votes.Shared (articleVote, articleVotingButton, downVoteButton, 
 import Web.View.Components.Button (button)
 import Web.View.Prelude
 
-articleVote :: [Vote] -> Id Article -> Maybe Vote
-articleVote votes articleId = find (\vote -> articleId == (get #articleId vote)) votes
+articleVote :: [Vote] -> Article -> Maybe Vote
+articleVote votes article =
+  find (\vote -> (get #id article) == (get #articleId vote)) votes
 
-articleVotingButton :: Article -> [Vote] -> Maybe User -> Html
-articleVotingButton article votes user =
-  let articleId = (get #id article)
-   in case articleVote votes articleId of
-        Just vote -> downVoteButton (get #id vote)
-        Nothing -> upVoteButton article user
+articleVotingButton :: Article -> [Vote] -> (Maybe User) -> Html
+articleVotingButton _ _ Nothing = ""
+articleVotingButton article votes (Just user) =
+  case articleVote votes article of
+    Just vote -> downVoteButton vote
+    Nothing -> upVoteButton article user
 
-downVoteButton :: (Id Vote) -> Html
-downVoteButton voteId =
+downVoteButton :: Vote -> Html
+downVoteButton vote =
   [hsx|
-    <a href={DeleteVoteAction voteId} class="js-delete js-delete-no-confirm">
+    <a href={DeleteVoteAction (get #id vote)} class="js-delete js-delete-no-confirm">
       <button class={button}>Down Vote</button>
     </a>
   |]
 
-upVoteButton :: Article -> Maybe User -> Html
-upVoteButton _ Nothing = ""
-upVoteButton article (Just user) =
+upVoteButton :: Article -> User -> Html
+upVoteButton article user =
   [hsx|
-    <form action={CreateVoteAction} method="POST">
-        <input type="hidden" name="articleId" value={articleId} />
-        <input type="hidden" name="userId" value={userId} />
-        <button class={button} type="submit">Up Vote</button>
+    <form action={CreateVoteAction (get #id user) (get #id article)} method="POST">
+      <button class={button} type="submit">Up Vote</button>
     </form>
   |]
-  where
-    articleId = show $ get #id article
-    userId = show $ get #id user
