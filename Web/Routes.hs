@@ -5,6 +5,8 @@ import Web.Types
 
 instance AutoRoute UsersController
 
+instance AutoRoute VotesController
+
 instance AutoRoute StaticController
 
 instance AutoRoute ArticlesController

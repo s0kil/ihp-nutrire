@@ -1,25 +1,29 @@
 module Web.View.Articles.Index where
 
 import Web.View.Prelude
+import Web.View.Votes.Shared (articleVotingButton)
 
-data IndexView = IndexView {articles :: [Article]}
+data IndexView = IndexView
+  { votes :: [Vote],
+    articles :: [Article]
+  }
 
 instance View IndexView where
   html IndexView {..} =
     let alternatedArticles = alternateArticles articles
      in [hsx|
           <div class="grid grid-cols-2 m-auto">
-            {forEach alternatedArticles renderArticles}
+            {forEach alternatedArticles (renderArticles votes)}
           </div>
         |]
 
-renderArticles :: (Int, [Article]) -> Html
-renderArticles (order, article : []) = renderArticle article order
-renderArticles (order, articles) =
-  forEach articles (\article -> renderArticle article order)
+renderArticles :: [Vote] -> (Int, [Article]) -> Html
+renderArticles votes (order, article : []) = renderArticle article order votes
+renderArticles votes (order, articles) =
+  forEach articles (\article -> renderArticle article order votes)
 
-renderArticle :: Article -> Int -> Html
-renderArticle article order =
+renderArticle :: Article -> Int -> [Vote] -> Html
+renderArticle article order votes =
   let textOrderStyle = if order == 2 then 1 else 2
       imageOrderStyle = if order == 2 then 2 else 1
    in [hsx|
@@ -33,7 +37,7 @@ renderArticle article order =
             </h1>
             <p>{get #text article}</p>
             <div class="absolute bottom-0">
-              Voting Button
+                {articleVotingButton article votes currentUser}
             </div>
           </div>
         </div>
@@ -46,6 +50,9 @@ renderArticle article order =
     pathToImage :: Article -> Text
     pathToImage article =
       fromMaybe "" (get #image article)
+
+    currentUser :: Maybe User
+    currentUser = fromFrozenContext @(Maybe User)
 
 {-
   The Result Is:

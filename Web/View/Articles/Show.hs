@@ -1,9 +1,11 @@
 module Web.View.Articles.Show where
 
 import Web.View.Prelude
+import Web.View.Votes.Shared (downVoteButton, upVoteButton)
 
 data ShowView = ShowView
-  { author :: User,
+  { vote :: Maybe Vote,
+    author :: User,
     article :: Article
   }
 
@@ -30,7 +32,7 @@ instance View ShowView where
               <span class="mr-1">{timeAgo createdAt}</span>
             </div>
             <div class="my-6">
-              {votingButton currentUser}
+              {votingButton vote article currentUser}
             </div>
             <div class="my-6">
               {text}
@@ -40,9 +42,7 @@ instance View ShowView where
     where
       currentUser = fromFrozenContext @(Maybe User)
 
-votingButton :: Maybe User -> Html
-votingButton Nothing = [hsx||]
-votingButton (Just _) =
-  [hsx|
-    <button>Voting Button</button>
-  |]
+votingButton :: Maybe Vote -> Article -> Maybe User -> Html
+votingButton (Just vote) _ _ = downVoteButton vote
+votingButton Nothing _ Nothing = ""
+votingButton Nothing article (Just user) = upVoteButton article user

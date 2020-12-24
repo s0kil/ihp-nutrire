@@ -7,6 +7,7 @@ import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
 import Web.Routes
 import Web.Types
+import Web.View.Components.Button (button)
 
 defaultLayout :: Html -> Html
 defaultLayout inner =
@@ -115,7 +116,7 @@ navigation =
           let fullname = get #fullname user
            in [hsx|
             <div class="flex items-center relative">
-              <button class="py-2 px-4 capitalize tracking-wide text-black border border-black font-medium focus:outline-none">
+              <button class={button ++ "font-medium"}>
                 {fullname}
               </button>
               <span class="border"></span>

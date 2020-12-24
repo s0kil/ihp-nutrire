@@ -42,3 +42,8 @@ data CategoriesController
   | UpdateCategoryAction {categoryId :: !(Id Category)}
   | DeleteCategoryAction {categoryId :: !(Id Category)}
   deriving (Eq, Show, Data)
+
+data VotesController
+  = CreateVoteAction {userId :: (Id User), articleId :: (Id Article)}
+  | DeleteVoteAction {voteId :: !(Id Vote)}
+  deriving (Eq, Show, Data)
