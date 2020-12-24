@@ -15,8 +15,14 @@ instance Controller VotesController where
           setErrorMessage "Voting Failed"
           maybeRedirectToReferer request
         Right vote -> do
-          vote |> createRecord
-          setSuccessMessage "Successfully Voted"
+          voteIsUnique <- isUniqueVote vote
+          case voteIsUnique of
+            True -> do
+              vote |> createRecord
+              setSuccessMessage "Successfully Voted"
+            False -> do
+              setSuccessMessage "You Have Already Voted"
+
           maybeRedirectToReferer request
 
 buildVote vote =
@@ -24,6 +30,22 @@ buildVote vote =
     |> fill @["userId", "articleId"]
     |> validateField #userId nonEmpty
     |> validateField #articleId nonEmpty
+
+isUniqueVote vote = do
+  let userId = get #userId vote
+      articleId = get #articleId vote
+
+  maybeVote <-
+    query @Vote
+      |> filterWhere (#userId, userId)
+      |> filterWhere (#articleId, articleId)
+      |> fetchOneOrNothing
+
+  let exists = case maybeVote of
+        Just _ -> False
+        Nothing -> True
+
+  pure exists
 
 maybeRedirectToReferer request =
   case (requestHeaderReferer request) of

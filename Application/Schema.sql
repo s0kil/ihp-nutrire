@@ -25,7 +25,8 @@ CREATE TABLE categories (
 CREATE TABLE votes (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
   user_id UUID NOT NULL,
-  article_id UUID NOT NULL
+  article_id UUID NOT NULL,
+  CONSTRAINT unique_vote UNIQUE (user_id, article_id)
 );
 ALTER TABLE articles
 ADD CONSTRAINT articles_ref_category_id FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE NO ACTION;
