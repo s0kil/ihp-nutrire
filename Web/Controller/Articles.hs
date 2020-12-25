@@ -15,7 +15,9 @@ instance Controller ArticlesController where
         >>= fetchRelated #articles
 
     votes <-
-      query @Vote |> fetch
+      query @Vote
+        |> filterWhere (#userId, currentUserId)
+        |> fetch
 
     let articles = get #articles category
 
