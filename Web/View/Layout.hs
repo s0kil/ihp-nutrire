@@ -11,7 +11,7 @@ import Web.View.Components.Button (button)
 
 defaultLayout :: Html -> Html
 defaultLayout inner =
-  H.docTypeHtml ! A.lang "en" ! A.class_ "" $
+  H.docTypeHtml ! A.lang "en" ! A.class_ "" ! A.style "width: 100%; height: 100%;" $
     [hsx|
       <head>
         {metaTags}
@@ -22,9 +22,9 @@ defaultLayout inner =
         <title>Nutrire</title>
       </head>
 
-      <body class="">
+      <body style="width: 100%; height: 100%;">
         {navigation}
-        <div class="pt-20 pl-6 pr-6">
+        <div class="pt-20 pl-6 pr-6" style="width: 100%; height: 100%;">
           {renderFlashMessages}
           {inner}
         </div>
@@ -179,6 +179,6 @@ footer =
     linkTo text path =
       [hsx|
         <li>
-          <a href={path} class="text-orange-600 hover:underline">{text}</a>
+          <a href={path} class="text-yellow-500 hover:underline">{text}</a>
         </li>
       |]
