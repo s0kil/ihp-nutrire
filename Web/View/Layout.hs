@@ -95,7 +95,11 @@ navigation =
   where
     categoriesWithLinks :: Html
     categoriesWithLinks =
-      [hsx|{forEach categories renderCategory}|]
+      [hsx|
+        <ul class="flex space-x-4">
+          {forEach categories renderCategory}
+        </ul>
+      |]
       where
         categories :: [Category]
         categories = fromFrozenContext @[Category]
@@ -107,7 +111,11 @@ navigation =
 
         renderCategory :: Category -> Html
         renderCategory category =
-          [hsx|<a href={categoryPath category}>{get #name category}</a>|]
+          [hsx|
+            <li class="uppercase">
+              <a class="hover:underline" href={categoryPath category}>{get #name category}</a>
+            </li>
+          |]
 
     loginLogoutLinks :: Html
     loginLogoutLinks =
