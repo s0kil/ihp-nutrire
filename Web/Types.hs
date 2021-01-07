@@ -5,12 +5,16 @@ import IHP.LoginSupport.Types
 import IHP.ModelSupport
 import IHP.Prelude
 
-data WebApplication = WebApplication deriving (Eq, Show)
-
-data StaticController = WelcomeAction deriving (Eq, Show, Data)
-
 instance HasNewSessionUrl User where
   newSessionUrl _ = "/NewSession"
+
+data WebApplication
+  = WebApplication
+  deriving (Eq, Show)
+
+data HomeController
+  = IndexAction
+  deriving (Eq, Show, Data)
 
 data SessionsController
   = NewSessionAction

@@ -1,4 +1,4 @@
-# IHP Nutrite
+# IHP Nutrire
 
 > Rewrite Of https://github.com/danielsokil/nutrire With [IHP](https://ihp.digitallyinduced.com/)
 

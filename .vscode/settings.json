@@ -31,7 +31,8 @@
     "stack.yaml": true,
     "start": true,
     ".vscode": true,
-    ".github": true
+    ".github": true,
+    "styles": true
   },
   "explorerExclude.backup": null,
 }

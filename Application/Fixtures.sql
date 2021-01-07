@@ -16,6 +16,12 @@ VALUES (
     'Breakfast',
     1
   );
+INSERT INTO public.categories (id, name, priority)
+VALUES (
+    'f439b6ec-e6f1-4cf6-bacc-276c68952743',
+    'Lunch',
+    4
+  );
 ALTER TABLE public.categories ENABLE TRIGGER ALL;
 ALTER TABLE public.users DISABLE TRIGGER ALL;
 INSERT INTO public.users (
@@ -146,6 +152,30 @@ VALUES (
     '2020-12-21 20:54:57.606242-05',
     '6b8bc3d1-2eeb-47eb-8885-8444a91287e8'
   );
+INSERT INTO public.articles (
+    id,
+    user_id,
+    title,
+    text,
+    image,
+    created_at,
+    category_id
+  )
+VALUES (
+    '425efb18-57c1-4be1-8a60-b1056117c10b',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
+    'Random Title 0',
+    'Random Text 0',
+    'https://loremflickr.com/600/600/nutrition?lock=27',
+    '2020-12-26 01:00:25.228452-05',
+    'f439b6ec-e6f1-4cf6-bacc-276c68952743'
+  );
 ALTER TABLE public.articles ENABLE TRIGGER ALL;
 ALTER TABLE public.votes DISABLE TRIGGER ALL;
+INSERT INTO public.votes (id, user_id, article_id)
+VALUES (
+    'a84c4300-f3ab-4108-a193-1d638e8c6d9a',
+    'ce867693-686f-4c58-a4d2-b761266bd730',
+    '304ac067-7962-4ec1-82f2-bbcd76cd64f3'
+  );
 ALTER TABLE public.votes ENABLE TRIGGER ALL;

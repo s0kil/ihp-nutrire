@@ -11,7 +11,7 @@ import Web.View.Components.Button (button)
 
 defaultLayout :: Html -> Html
 defaultLayout inner =
-  H.docTypeHtml ! A.lang "en" ! A.class_ "" $
+  H.docTypeHtml ! A.lang "en" ! A.class_ "" ! A.style "width: 100%; height: 100%;" $
     [hsx|
       <head>
         {metaTags}
@@ -22,7 +22,7 @@ defaultLayout inner =
         <title>Nutrire</title>
       </head>
 
-      <body class="">
+      <body style="width: 100%; height: 100%;">
         {navigation}
         <div class="pt-20 pl-6 pr-6">
           {renderFlashMessages}
@@ -95,7 +95,11 @@ navigation =
   where
     categoriesWithLinks :: Html
     categoriesWithLinks =
-      [hsx|{forEach categories renderCategory}|]
+      [hsx|
+        <ul class="flex space-x-4">
+          {forEach categories renderCategory}
+        </ul>
+      |]
       where
         categories :: [Category]
         categories = fromFrozenContext @[Category]
@@ -107,7 +111,11 @@ navigation =
 
         renderCategory :: Category -> Html
         renderCategory category =
-          [hsx|<a href={categoryPath category}>{get #name category}</a>|]
+          [hsx|
+            <li class="uppercase">
+              <a class="hover:underline" href={categoryPath category}>{get #name category}</a>
+            </li>
+          |]
 
     loginLogoutLinks :: Html
     loginLogoutLinks =
@@ -179,6 +187,6 @@ footer =
     linkTo text path =
       [hsx|
         <li>
-          <a href={path} class="text-orange-600 hover:underline">{text}</a>
+          <a href={path} class="text-yellow-500 hover:underline">{text}</a>
         </li>
       |]

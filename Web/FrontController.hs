@@ -4,9 +4,9 @@ import IHP.LoginSupport.Middleware
 import IHP.RouterPrelude
 import Web.Controller.Articles
 import Web.Controller.Categories
+import Web.Controller.Home
 import Web.Controller.Prelude
 import Web.Controller.Sessions
-import Web.Controller.Static
 import Web.Controller.Users
 import Web.Controller.Votes
 import Web.View.Layout
@@ -19,7 +19,7 @@ fetchCategories = do
 
 instance FrontController WebApplication where
   controllers =
-    [ startPage WelcomeAction,
+    [ startPage IndexAction,
       parseRoute @UsersController,
       parseRoute @VotesController,
       parseRoute @SessionsController,

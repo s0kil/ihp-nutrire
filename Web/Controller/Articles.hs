@@ -1,7 +1,6 @@
 module Web.Controller.Articles where
 
 import qualified Data.Text as Text
-import IHP.ControllerPrelude
 import Web.Controller.Prelude
 import Web.View.Articles.Edit
 import Web.View.Articles.Index
@@ -15,7 +14,9 @@ instance Controller ArticlesController where
         >>= fetchRelated #articles
 
     votes <-
-      query @Vote |> fetch
+      query @Vote
+        |> filterWhere (#userId, currentUserId)
+        |> fetch
 
     let articles = get #articles category
 
