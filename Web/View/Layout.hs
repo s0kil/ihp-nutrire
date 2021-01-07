@@ -24,7 +24,7 @@ defaultLayout inner =
 
       <body style="width: 100%; height: 100%;">
         {navigation}
-        <div class="pt-20 pl-6 pr-6" style="width: 100%; height: 100%;">
+        <div class="pt-20 pl-6 pr-6">
           {renderFlashMessages}
           {inner}
         </div>
