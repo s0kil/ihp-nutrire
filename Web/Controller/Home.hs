@@ -24,6 +24,7 @@ instance Controller HomeController where
           >>= \articles ->
             articles
               |> sortOn (\article -> article |> get #categoryId |> get #priority)
+              |> take 4
               |> pure
 
     render IndexView {..}
