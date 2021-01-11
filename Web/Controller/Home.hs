@@ -19,12 +19,13 @@ instance Controller HomeController where
     -- TODO: `distinctOn #categoryId` https://github.com/digitallyinduced/ihp/issues/654
     articles :: [Include "categoryId" Article] <-
       query @Article
+        |> distinctOn #categoryId
         |> fetch
           >>= collectionFetchRelated #categoryId
           >>= \articles ->
             articles
               |> sortOn (\article -> article |> get #categoryId |> get #priority)
-              |> take 4
+              |> take 4 -- One Row Of Four Items
               |> pure
 
     render IndexView {..}
