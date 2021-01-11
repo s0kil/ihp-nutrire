@@ -164,8 +164,8 @@ INSERT INTO public.articles (
 VALUES (
     '425efb18-57c1-4be1-8a60-b1056117c10b',
     'ce867693-686f-4c58-a4d2-b761266bd730',
-    'Random Title 0',
-    'Random Text 0',
+    'Random Title 5345343',
+    'Random Text 4243',
     'https://loremflickr.com/600/600/nutrition?lock=27',
     '2020-12-26 01:00:25.228452-05',
     'f439b6ec-e6f1-4cf6-bacc-276c68952743'
