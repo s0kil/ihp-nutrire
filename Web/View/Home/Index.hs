@@ -15,7 +15,7 @@ instance View IndexView where
         <div class="relative bg-cover bg-center bg-no-repeat" style="background-image: url(https://loremflickr.com/2000/1000/nutrition);">
           <div class="absolute bottom-0 py-6 pl-4 pr-4 font-bold">
             <h1 class="text-2xl text-yellow-500">
-              <a href={ShowArticleAction (get #id popularArticle)}>{get #title popularArticle}</a>
+              <a href={ShowArticleAction $ get #id popularArticle}>{get #title popularArticle}</a>
             </h1>
             <div class="text-white text-sm">
               {get #text popularArticle}
@@ -37,14 +37,14 @@ renderArticle article =
       </div>
       <div class="absolute top-0 py-6 pl-4 pr-4 w-full" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0))">
         <h1 class="text-xl text-white font-bold">
-          <a href={pathTo (ArticlesAction (get #id category))} class="border-b-2 border-yellow-400">
+          <a href={pathTo $ ArticlesAction $ get #id category} class="border-b-2 border-yellow-400">
             {get #name category}
           </a>
         </h1>
       </div>
       <div class="absolute bottom-0 py-6 pl-4 pr-4 w-full" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5))">
         <h1 class="text-lg text-white font-bold">
-          <a href={pathTo (ShowArticleAction (get #id article))}>
+          <a href={pathTo $ ShowArticleAction $ get #id article}>
             {get #title article}
           </a>
         </h1>
